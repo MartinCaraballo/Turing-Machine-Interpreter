@@ -10,6 +10,12 @@ public class Tape<T> {
         values = tapeValues;
     }
 
+    /**
+     * Write a value in the tape.
+     * @param value The value to write in the tape.
+     * @param movement Move to the left or right after write.
+     * @return The written element.
+     */
     public T write(T value, TapeMovement movement) {
         values[currentIndex] = value;
         move(movement);
@@ -17,12 +23,32 @@ public class Tape<T> {
         return value;
     }
 
+    /**
+     * Read the element pointed in the tape.
+     * @return Element pointed in the tape.
+     */
+    public T read() {
+        return values[currentIndex];
+    }
+
+    /**
+     * Returns a copy of the tape.
+     * @return Tape cloned.
+     */
+    public T[] getTapeValues() {
+        return values.clone();
+    }
+
+    /**
+     * Move the pointer in the tape to left or right.
+     * @param movement LEFT or RIGHT
+     */
     private void move(TapeMovement movement) {
         switch (movement) {
             case LEFT:
-                currentIndex++;
-            case RIGHT:
                 currentIndex--;
+            case RIGHT:
+                currentIndex++;
         }
     }
 }

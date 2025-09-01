@@ -1,17 +1,32 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.Execution.Execution;
+import org.example.models.State;
+import org.example.models.Tape;
+import org.example.models.TapeMovement;
+import org.javatuples.Triplet;
+
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        State<Character> initialState = new State<>(false);
+        State<Character> secondState = new State<>(false);
+        State<Character> thirdState = new State<>(true);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Character[] tape = {'1', '0', '1', '0', '2'};
+        Tape<Character> tapeObject = new Tape<>(tape);
+
+        initialState.addNextState('1', new Triplet<>(
+                'B', TapeMovement.RIGHT, secondState));
+        secondState.addNextState('0', new Triplet<>(
+                'Z', TapeMovement.RIGHT, initialState));
+        initialState.addNextState('2', new Triplet<>(
+                'C',  TapeMovement.LEFT, thirdState
+        ));
+
+
+        Execution<Character> execution = new Execution<>(initialState, tapeObject);
+        System.out.println(Arrays.toString(execution.execute()));
     }
 }
