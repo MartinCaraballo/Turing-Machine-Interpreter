@@ -27,10 +27,19 @@ public class State<T> {
         return NEXT_STATE_MAP.put(key, nextState);
     }
 
+    /**
+     * Returns the next state of the actual state.
+     * @param key the key that gets into the next state.
+     * @return The previous state or null if there was no state associated with the key.
+     */
     public Triplet<T, TapeMovement, State<T>> getNextState(T key) {
         return NEXT_STATE_MAP.get(key);
     }
 
+    /**
+     * Returns if the actual state is an acceptable state.
+     * @return True if is acceptable, False if not.
+     */
     public boolean getIsAcceptable() {
         return IS_ACCEPTABLE;
     }

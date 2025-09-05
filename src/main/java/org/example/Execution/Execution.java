@@ -15,6 +15,10 @@ public class Execution<T> {
         TAPE = tape;
     }
 
+    /**
+     * Execute reading the tape, writing and moving into the corresponding next state evaluating the value in the tape.
+     * @return A copy of the elements in the tape.
+     */
     public T[] execute() {
         T actualElement = TAPE.read();
         Triplet<T, TapeMovement, State<T>> nextStateTuple = actualState.getNextState(actualElement);
